@@ -14,18 +14,18 @@ public class AutorBean {
 	private Autor autor = new Autor();
 	
 	@Inject//Nao precisa instanciar o meu dao, pois o dao é uma dependencia que sera injetada pelo container.
-	private AutorDao dao;
+	private AutorService service;
 	
 	public Autor getAutor() {
 		return autor;
 	}
 	
 	public void cadastra() {
-		this.dao.salva(autor);
+		this.service.adicionar(autor);
 		this.autor = new Autor();
 	}
 	
 	public List<Autor> getAutores() {
-		return this.dao.todosAutores();
+		return this.service.todosAutores();
 	}
 }
