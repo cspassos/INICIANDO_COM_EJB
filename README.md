@@ -19,6 +19,10 @@
 	* @TransactionManagement(TransactionManagementType.CONTAINER) - para definirmos explicitamente que quem controla nossas transações é o container.
 	* @ApplicationException(rollback = true) - rollback se ocorrer uma exception ele nao vai salvar nada no banco, pois vai voltar tudo que foi feito.
 	* @Interceptors({LogInterceptador.class})- Informar que vai usar o interceptador da classe LogInterceptador. //Para nao precisar utilizar a anotação do interceptador em todas as classes, foi criado um aquivo chamado ejb-jar
+	* @WebService - para o padrão ejb publicar a classe com os padroes soap e wsdl.
+	* @WebParam - na msg de apresentação do webservice via ficar o name: nomeDoLivro.
+	* @WebResult(name="autores") - nome do elemento que representa o retorno
+	* LivrariaWSProxy() - objeto para fazer a chamada remota e gerar SOAP, esse objeto é chamado de proxy.
 	
 	* extends RuntimeException {//RuntimeException - Assim o compilador nao obriga o desenvolvedor a fzr um tratamento explicito da exeção, ou seja, nao precisa colocar declaração nos metodos "throws LivrariaException".
 	* Quem faz o gerenciamento do Bean é o EJB.
