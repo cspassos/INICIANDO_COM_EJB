@@ -9,7 +9,7 @@
 		* Serviços de Transação;
  * É pelo do EJB que temos acesso que o servidor nos oferece sem se preocupar como cada um deles foi inicializado.
  
-  # Anotações: 
+  ## Anotações: 
 	* Transformar uma classe em um EJB: @Stateless.
 	* @Singleton - faz com que eu tenha apenas uma instancia dessa classe, assim sem precisa mexer no xml, ou seja, vai carregar o banco apenas umas vez
 	* @PostConstruct - tambem chamado de callback - É chamado pelo proprio EJB container.
@@ -32,6 +32,24 @@
 	* @PersistenceContext - Faz com que o EJB container injete uma entityManager.
 	* O EJB automaticamente ja abre e fecha a transação com o banco. Isso ocorre no jta do persistence.
 	* O EJB container usa o JTA(Java Transaction API ) para controle de transações.
+	
+ ## Perguntas:
+ 
+	1. Qual a diferença entre mandatory e requered? 
+		R= É obrigatorio ter uma transação, então quem o chamou deve fornecer uma transação. O requered informa que precisa de uma transação,
+			se quando chamado houver uma transacao, ele utiliza esta transacao ja criada, se nao houver cria uma transacao.
+
+	2. Para que serve o REQUIRES_NEW?
+	R= Sempre abre uma nova transacao.
+	
+	3. Para que serve o NOT_SUPPORTED?
+		R= Indica que nao havera uma transação.
+	
+	4. Para que serve o SUPPORTED?
+		R= Indica que pode haver transacao.
+	
+	5. Se não tiver CDI como eu utilizo o EJB na Classe para injeção, com qual anotação?
+		R= @EJB, pois essa anotação serve para fazermos a injeção de dependência do nosso EJB,
 	
 	
 	
