@@ -9,16 +9,20 @@ import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
+import javax.interceptor.Interceptor;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
+import br.com.caelum.livraria.interceptador.LogInterceptador;
 import br.com.caelum.livraria.modelo.Autor;
 
 //@Stateless: Transformar uma classe em um EJB.
 @Stateless				 
 @TransactionManagement(TransactionManagementType.CONTAINER)//para definirmos explicitamente que quem controla nossas transações é o container.
-public class AutorDao { 
+//@Interceptors({LogInterceptador.class})//Informar que vai usar o interceptador da classe LogInterceptador
+public class AutorDao { //Para nao precisar utilizar a anotação do interceptador em todas as classes, foi criado um aquivo chamado ejb-jar
 
 	@PersistenceContext//Faz com que o EJB container injete uma entityManager.
 	private EntityManager manager;

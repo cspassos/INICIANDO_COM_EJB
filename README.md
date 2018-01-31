@@ -18,6 +18,8 @@
 	* @TransactionAttribute(TransactionAttributeType.REQUIRED)- padrão de configuração pra cada metodo. REQUIRED - sera aberto automaticamente uma nova transação
 	* @TransactionManagement(TransactionManagementType.CONTAINER) - para definirmos explicitamente que quem controla nossas transações é o container.
 	* @ApplicationException(rollback = true) - rollback se ocorrer uma exception ele nao vai salvar nada no banco, pois vai voltar tudo que foi feito.
+	* @Interceptors({LogInterceptador.class})- Informar que vai usar o interceptador da classe LogInterceptador. //Para nao precisar utilizar a anotação do interceptador em todas as classes, foi criado um aquivo chamado ejb-jar
+	
 	* extends RuntimeException {//RuntimeException - Assim o compilador nao obriga o desenvolvedor a fzr um tratamento explicito da exeção, ou seja, nao precisa colocar declaração nos metodos "throws LivrariaException".
 	* Quem faz o gerenciamento do Bean é o EJB.
 	* nao precisa instanciar o meu dao, pois o dao é uma dependencia que sera injetada pelo container.
