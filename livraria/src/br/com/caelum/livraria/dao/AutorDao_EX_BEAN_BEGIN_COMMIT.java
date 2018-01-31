@@ -16,19 +16,24 @@ import javax.transaction.UserTransaction;
 import br.com.caelum.livraria.modelo.Autor;
 
 //@Stateless: Transformar uma classe em um EJB.
-@Stateless				 
-@TransactionManagement(TransactionManagementType.CONTAINER)//para definirmos explicitamente que quem controla nossas transações é o container.
-public class AutorDao { 
+@Stateless				//Bean faz com que o session bean gerencie a transação, assim aceitando begin e commit, mesmo com ejb. 
+@TransactionManagement(TransactionManagementType.BEAN)//e em seguida utilizar o UseTransaction do jpa
+public class AutorDao_EX_BEAN_BEGIN_COMMIT { //Se tivesse usando o CONTAINER no lugar o BEAN, nao precisava utilizar begin e commit, pois o ejb ja gerenciava.
 
 	@PersistenceContext//Faz com que o EJB container injete uma entityManager.
 	private EntityManager manager;
+	
+	@Inject
+	UserTransaction tx;
 
 	@PostConstruct//tambem chamado de callback - É chamado pelo proprio EJB container
 	void aposCriacao() {
 		System.out.println("AutorDao foi criado");
 	}
 	
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)//padrão de configuração pra cada metodo. REQUIRED - sera aberto automaticamente uma nova transação
+	//Como estou usando o @TransactionManagement(TransactionManagementType.BEAN) nao preciso usar o required, agora, caso usasse o 
+	//@TransactionManagement(TransactionManagementType.CONTAINER) ai precisaria usar o required.
+	//@TransactionAttribute(TransactionAttributeType.REQUIRED)//padrão de configuração pra cada metodo. REQUIRED - sera aberto automaticamente uma nova transação
 	public void salva(Autor autor) {
 		System.out.println("salvando Autor " + autor.getNome());
 		
@@ -39,11 +44,17 @@ public class AutorDao {
 //			e.printStackTrace();
 //		}
 		
-		//O EJB automaticamente ja abre e fecha a transação com o banco. Isso ocorre no jta do persistence. E apenas se nao USAR O BEAN na classe
-		manager.persist(autor);
+		try {
+			tx.begin();
+			//O EJB automaticamente ja abre e fecha a transação com o banco. Isso ocorre no jta do persistence. E apenas se nao USAR O BEAN na classe
+			manager.persist(autor);
+			tx.commit();
 			
-		System.out.println("salvou Autor " + autor.getNome());
+			System.out.println("salvou Autor " + autor.getNome());
 			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public List<Autor> todosAutores() {

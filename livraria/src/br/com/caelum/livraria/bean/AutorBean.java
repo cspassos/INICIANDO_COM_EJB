@@ -7,6 +7,8 @@ import javax.inject.Inject;
 
 import br.com.caelum.livraria.dao.AutorDao;
 import br.com.caelum.livraria.modelo.Autor;
+import br.com.caelum.livraria.service.AutorService;
+import br.com.caelum.livraria.service.exception.LivrariaException;
 
 @Model
 public class AutorBean {
