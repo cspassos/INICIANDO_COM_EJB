@@ -17,6 +17,7 @@ public class LivrariaWS {
 
 	@Inject
 	LivroDao dao;
+	
 	@WebResult(name="autores")//nome do elemento que representa o retorno									
 	public List<Livro> getLivrosPeloNome(@WebParam(name="titulo")String nome){//@WebParam -> na msg de apresentação do webservice via ficar titulo: nomeDoLivro
 		System.out.println("LivrariaWS: procurando pelo nome: " + nome);

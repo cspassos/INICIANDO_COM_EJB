@@ -23,6 +23,7 @@
 	* @WebParam - na msg de apresentação do webservice via ficar o name: nomeDoLivro.
 	* @WebResult(name="autores") - nome do elemento que representa o retorno
 	* LivrariaWSProxy() - objeto para fazer a chamada remota e gerar SOAP, esse objeto é chamado de proxy.
+	* @Schedule(hour = "*", minute="*", second="*/10")//Mostrar a hr que vai executar
 	
 	* extends RuntimeException {//RuntimeException - Assim o compilador nao obriga o desenvolvedor a fzr um tratamento explicito da exeção, ou seja, nao precisa colocar declaração nos metodos "throws LivrariaException".
 	* Quem faz o gerenciamento do Bean é o EJB.
