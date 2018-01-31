@@ -7,7 +7,7 @@
 		* Tratamento de exceções;
 		* Segurança: ex: segurança do webservie do mesmo modo que sua aplicação.
 		* Serviços de Transação;
- * É atravez do EJB que temos acesso que o servidor nos oferece sem se preocupar como cada um deles foi inicializado.
+ * É pelo do EJB que temos acesso que o servidor nos oferece sem se preocupar como cada um deles foi inicializado.
  
   # Anotações: 
 	* Transformar uma classe em um EJB: @Stateless.
@@ -17,7 +17,7 @@
 	* Quem faz o gerenciamento do Bean é o EJB.
 	* nao precisa instanciar o meu dao, pois o dao é uma dependencia que sera injetada pelo container.
 	* Os Sesssion Bean são Thread safe, ou seja, apenas uma thread pode usar o dao ao mesmo tempo. ex: se eu cadastro um autor e depois cadastro outro ele primeiro termina um apra depois ir para o segundo.
-	
+
 	
 	
 	
